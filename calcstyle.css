@@ -1,0 +1,56 @@
+/*
+Calc height:
+    Total: 540
+    Screen: 90
+    Border: 30
+    Gap Screen to buttons: 30
+    Buttons: 60
+    Buttons gap: 15
+
+Calc width:
+    Total: 360
+    Screen: Total - Border * 2 : 300
+    Border: 30
+    Buttons: 60
+    Buttons gap: 15
+
+Colors:
+    Gunmetal: 022B3A
+    Teal: 1F7A8C
+    Columbia blue: BFDBF7
+    Lavender: E1E5F2
+    White: FFFFFF
+*/
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+#calcMainContainer {
+    height: 540px;
+    width: 360px;
+    background-color: rgb()
+}
+
+#calcContentContainer {
+
+}
+
+#screen {
+
+}
+
+#buttonContainer {
+
+}
+
+button {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    text-align: center;
+}
