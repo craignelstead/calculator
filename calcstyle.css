@@ -15,37 +15,61 @@ Calc width:
     Buttons gap: 15
 
 Colors:
-    Gunmetal: 022B3A
-    Teal: 1F7A8C
-    Columbia blue: BFDBF7
-    Lavender: E1E5F2
-    White: FFFFFF
+    Gunmetal: #022B3A
+    Teal: #1F7A8C
+    Columbia blue: #BFDBF7
+    Lavender: #E1E5F2
+    White: #FFFFFF
+    Pale dogwood: #ECD1C2
 */
 
 body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px;
+    margin: 60px;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 #calcMainContainer {
     height: 540px;
     width: 360px;
-    background-color: rgb()
+    background-color: #022B3A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #calcContentContainer {
-
+    height: 480px;
+    width: 300px;
 }
 
 #screen {
-
+    height: 90px;
+    width: 285px;
+    background-color: #E1E5F2;
+    margin-bottom: 30px;
 }
 
 #buttonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
 
+.buttonrow {
+    display: flex;
+    gap: 15px;
+}
+
+#bottom2rowsMainContainer {
+    display: flex;
+}
+
+#bottom2rowsSubContainer {
+    display: flex;
+    flex-direction: column;
 }
 
 button {
@@ -54,3 +78,26 @@ button {
     font-size: 30px;
     text-align: center;
 }
+
+.number {
+    background-color: #1F7A8C;
+    color: #FFFFFF;
+}
+
+.operator {
+    background-color: #BFDBF7;
+    color: #000000;
+}
+
+#btnClear {
+    width: 135px;
+}
+
+#btnEquals {
+    height: 135px;
+}
+
+.delete {
+    background-color: #ECD1C2;
+}
+
