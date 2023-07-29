@@ -55,6 +55,14 @@ body {
     width: 300px;
     background-color: #E1E5F2;
     border-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+
+#screenText {
+    font-size: 40px;
+    margin-left: auto;
+    margin-right: 10px;
 }
 
 #buttonContainer {

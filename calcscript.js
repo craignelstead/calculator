@@ -11,8 +11,14 @@ function assignBtnListeners(){
     
     //Assign event listener to each node in nodelist
     for (let i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', updateScreen);
+        buttons[i].addEventListener('click', (evt) =>
+            checkButtonPressed(buttons[i]));
     }
+}
+
+//Determines which button was pressed and how to proceed
+function checkButtonPressed(button){
+    alert(button.id);
 }
 
 //Updates the calculator screen
