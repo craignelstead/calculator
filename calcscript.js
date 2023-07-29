@@ -7,7 +7,17 @@ assignBtnListeners();
 
 //Adds event listeners to all buttons
 function assignBtnListeners(){
+    const buttons = document.getElementsByClassName('button');
+    
+    //Assign event listener to each node in nodelist
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', updateScreen);
+    }
+}
 
+//Updates the calculator screen
+function updateScreen(){
+    
 }
 
 //Used to decide which operator to call. Called when equal key is pressed.
