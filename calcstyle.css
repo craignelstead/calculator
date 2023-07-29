@@ -38,29 +38,34 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    filter: drop-shadow(5px 5px 10px black);
+    border-radius: 5px;
 }
 
 #calcContentContainer {
     height: 480px;
     width: 300px;
-}
-
-#screen {
-    height: 90px;
-    width: 285px;
-    background-color: #E1E5F2;
-    margin-bottom: 30px;
-}
-
-#buttonContainer {
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
+#screen {
+    height: 90px;
+    width: 300px;
+    background-color: #E1E5F2;
+    border-radius: 3px;
+}
+
+#buttonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .buttonrow {
     display: flex;
-    gap: 15px;
+    gap: 20px;
 }
 
 #bottom2rowsMainContainer {
@@ -70,6 +75,7 @@ body {
 #bottom2rowsSubContainer {
     display: flex;
     flex-direction: column;
+    gap: 15px;
 }
 
 button {
@@ -90,7 +96,7 @@ button {
 }
 
 #btnClear {
-    width: 135px;
+    width: 140px;
 }
 
 #btnEquals {
