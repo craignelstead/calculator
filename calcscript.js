@@ -23,13 +23,20 @@ function checkButtonPressed(button){
     //Determine button by id
     switch(button.id) {
         case 'btnEquals':
-            let valid = checkValidExpression() ? operate() : invalidExpression();
+            operate();
             break;
         case 'btnClear':
             clearAll();
             break;
         case 'btnBackspace':
             backspace();
+            break;
+        case 'btnMultiply':
+        case 'btnDivide':
+        case 'btnSubtract':
+        case 'btnAdd':
+            let validOp = checkValidOperator() ? updateScreen(button) :
+                invalidOp();
             break;
         default:
             updateScreen(button);
@@ -50,32 +57,50 @@ function updateScreen(button){
         if (screenText.innerText === ''){screenText.textContent = '0'}
 
         const alreadyDecimal = screenArr.find(char => char ===".");
-        if (alreadyDecimal === undefined) {console.log(alreadyDecimal)}
+        if (alreadyDecimal === undefined) {console.log()}
         else {return};
     }
 
     //Update the screen if max length is not exceded
-    if(screenText.innerText.length <= 10)
-        {screenText.textContent += buttonText;}
+    if(screenText.innerText.length < 12)
+        {screenText.textContent += buttonText;} 
+}
 
-    
+//Checks if most recent character is an operator to avoid invalid operators
+function checkValidOperator(){
+    //Split text into array
+    const screenText = document.getElementById('screenText');
+    let screenArr = screenText.innerText.split('');
+
+    //Check last character entered to see if it was an operator
+    let lastItem = screenArr.slice(-1);
+    if (lastItem == '+' ||
+        lastItem == '-' ||
+        lastItem == 'x' ||
+        lastItem == '&#247') {
+            return false;
+        }
+        else {return true;}
+}
+
+//Empty shell function for now
+function invalidOp(){
+    console.log('invalid operator!');
+}
+
+//Puts the text from screenText into an array
+function putTextInArray(){
+    const screenText = document.getElementById('screenText');
+
+    //Split each screen character into array
+    let screenArr = screenText.innerText.split('');
+
+    return screenArr;
 }
 
 //Used to decide which operator to call
 function operate(){
     
-}
-
-//Checks if valid expression is written
-function checkValidExpression(){
-    const expression = document.getElementById('screenText');
-    let expressionStr = expression.textContent.toString();
-    console.log(expressionStr);
-}
-
-//Temporarily flashes red screen if invalid expression detected
-function invalidExpression(){
-
 }
 
 //Addition operator
