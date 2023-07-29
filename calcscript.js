@@ -8,6 +8,8 @@ assignBtnListeners();
 //Adds event listeners to all buttons
 function assignBtnListeners(){
     const buttons = document.getElementsByClassName('button');
+
+    //Future: add event listeners for keystrokes
     
     //Assign event listener to each node in nodelist
     for (let i = 0; i < buttons.length; i++) {
@@ -21,7 +23,7 @@ function checkButtonPressed(button){
     //Determine button by id
     switch(button.id) {
         case 'btnEquals':
-            operate();
+            let valid = checkValidExpression() ? operate() : invalidExpression();
             break;
         case 'btnClear':
             clearAll();
@@ -39,18 +41,40 @@ function updateScreen(button){
     const screenText = document.getElementById('screenText');
     const buttonText = button.textContent.toString();
 
+    //Split each screen character into array
+    let screenArr = screenText.innerText.split('');
+
+    //Check if already a decimal point.
+    if(buttonText === '.'){
+        //Adds 0 if first character is a decimal
+        if (screenText.innerText === ''){screenText.textContent = '0'}
+
+        const alreadyDecimal = screenArr.find(char => char ===".");
+        if (alreadyDecimal === undefined) {console.log(alreadyDecimal)}
+        else {return};
+    }
+
+    //Update the screen if max length is not exceded
     if(screenText.innerText.length <= 10)
-        {screenText.textContent += buttonText;} 
+        {screenText.textContent += buttonText;}
+
+    
 }
 
-//Used to decide which operator to call. Called when equal key is pressed.
+//Used to decide which operator to call
 function operate(){
-    //Checks if expression is valid before calculating
-    checkExpression();
+    
 }
 
 //Checks if valid expression is written
-function checkExpression(){
+function checkValidExpression(){
+    const expression = document.getElementById('screenText');
+    let expressionStr = expression.textContent.toString();
+    console.log(expressionStr);
+}
+
+//Temporarily flashes red screen if invalid expression detected
+function invalidExpression(){
 
 }
 
