@@ -162,22 +162,24 @@ function putTextInArray(){
     return screenArr;
 }
 
-//Used to decide which operator to call
+//Solve the equation!
 function operate(){
-    let workingNum = [];
     let solution = 0;
 
-    for (let i = 0; i <= operators.length -1; i++) {
+    for (let i = 0; i <= operators.length; i++) {
+
+        if (i === 0) {solution = nums[i]}
+        
         switch (operators[i]) {
             case 'btnAdd':
-                workingNum.push(add(nums[i], nums[i+1]));
+                solution = add(solution, nums[i+1]);
+                console.log(solution);
                 break;
             case 'btnSubtract':
                 
                 break;
         }
     }
-    console.log(workingNum);
 }
 
 //Addition operator
@@ -228,8 +230,6 @@ function backspace(){
     else {
         operators.pop();
     }
-    console.log(nums);
-    console.log(operators);
 
     //Delete last character from screen
     screenText.textContent = screenContent.slice(0, -1);
