@@ -166,29 +166,40 @@ function putTextInArray(){
 function operate(){
     let solution = 0;
 
+    //If there is an extra operator, remove it. Also remove empty number.
+
+    if(nums[nums.length-1] === '') {nums.pop();}
+    if(nums.length === operators.length) {operators.pop();}
+
     for (let i = 0; i <= operators.length; i++) {
 
+        //On first iteration, working solution is first number
         if (i === 0) {solution = nums[i]}
         
+        //Perform operation based off operator
         switch (operators[i]) {
             case 'btnAdd':
                 solution = add(solution, nums[i+1]);
-                console.log(solution);
                 break;
             case 'btnSubtract':
                 solution = subtract(solution, nums[i+1]);
-                console.log(solution);
                 break;
             case 'btnMultiply':
                 solution = multiply(solution, nums[i+1]);
-                console.log(solution);
                 break;
             case 'btnDivide':
                 solution = divide(solution, nums[i+1]);
-                console.log(solution);
                 break;
         }
     }
+
+    solution = roundNumber(solution);
+
+    //Clear memory and update screen with solution
+    clearAll();
+    const screenText = document.getElementById('screenText');
+    screenText.innerText = solution;
+    nums[0] = solution;
 }
 
 //Addition operator
@@ -218,7 +229,7 @@ function divide(a,b){
 
 //Called if division by zero is attempted
 function divideByZero(){
-
+    
 }
 
 //Backspace button to delete most recent character
@@ -257,7 +268,8 @@ function clearAll(){
 }
 
 //Round long numbers
-function roundNumber(){
-
+function roundNumber(unroundedNum){
+    console.log(unroundedNum.length);
+    return unroundedNum;
 }
 
