@@ -176,7 +176,16 @@ function operate(){
                 console.log(solution);
                 break;
             case 'btnSubtract':
-                
+                solution = subtract(solution, nums[i+1]);
+                console.log(solution);
+                break;
+            case 'btnMultiply':
+                solution = multiply(solution, nums[i+1]);
+                console.log(solution);
+                break;
+            case 'btnDivide':
+                solution = divide(solution, nums[i+1]);
+                console.log(solution);
                 break;
         }
     }
