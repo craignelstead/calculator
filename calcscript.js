@@ -8,6 +8,12 @@
 //Runs when program loads
 assignBtnListeners();
 
+//Blank numbers
+let nums = [''];
+
+//Blank operators
+let operators = [];
+
 //Adds event listeners to all buttons
 function assignBtnListeners(){
     const buttons = document.getElementsByClassName('button');
@@ -46,6 +52,62 @@ function checkButtonPressed(button){
     }
 }
 
+//Creates multiple digit numbers
+function combineNums(buttonText){
+    switch (operators.length) {
+        case 5:
+            nums[5] += buttonText;
+            break;
+        case 4:
+            nums[4] += buttonText;
+            break;
+        case 3:
+            nums[3] += buttonText;
+            break;
+        case 2:
+            nums[2] += buttonText;
+            break;
+        case 1:
+            nums[1] += buttonText;
+            break;
+        case 0:
+            nums[0] += buttonText;
+            break;
+    }
+    console.log(nums);
+}
+
+function setOperators(button){
+    console.log(operators.length);
+    switch (operators.length) {
+        case 0:
+            nums.push('');
+            operators.push(button.id);
+            break;
+        case 1:
+            nums.push('');
+            operators.push(button.id);
+            break;
+        case 2:
+            nums.push('');
+            operators.push(button.id);
+            break;
+        case 3:
+            nums.push('');
+            operators.push(button.id);
+            break;
+        case 4:
+            nums.push('');
+            operators.push(button.id);
+            break;
+        case 5:
+            nums.push('');
+            operators.push(button.id);
+            break;
+    }
+    console.log(operators);
+}
+
 //Updates the calculator screen
 function updateScreen(button){
     const screenText = document.getElementById('screenText');
@@ -69,10 +131,24 @@ function updateScreen(button){
         return;
     }
 
-    //Update the screen if max length is not exceded
-    if(screenText.innerText.length < 12) {
-        screenText.textContent += buttonText;
-        //updateMemory(button);
+    //Screen cannot have more than 12 entries
+    if(screenText.innerText.length >= 12) {
+        return;
+    }
+
+    //Update the screen if all tests have passed
+    screenText.textContent += buttonText;
+
+    //If the entry is a number, combine it to previous numbers
+    if(buttonText >= 0 && buttonText <= 9) {
+        combineNums(buttonText);
+    }
+    else if(button.id === 'btnDecimal') {
+        combineNums(buttonText);
+    }
+    //Determines operator
+    else {
+        setOperators(button);
     }
 }
 
@@ -89,6 +165,7 @@ function checkValidOperator(){
         lastItem == '-' ||
         lastItem == 'x' ||
         lastItem == '' ||
+        lastItem == '.' ||
         lastItem === '÷') {
             return false;
         }
@@ -109,49 +186,36 @@ function putTextInArray(){
     return screenArr;
 }
 
-function updateMemory(button){
-    
-}
-
 //Used to decide which operator to call
 function operate(){
-    let expression = putTextInArray();
-    let newExpression = [];
-    
-    for (let i = 0; i <= expression.length+1; i++) {
-        //If there is no i+1, exit the loop
-        if (expression[i + 1] === undefined) {continue;}
 
-        let a = expression[i];
-        let b = expression[i+1];
-        console.log(typeof(a));
-        console.log(a.charCodeAt(0));
-        if (a >= 48 && a <= 57 && b >= 48 && b <= 57) {
-            newExpression.push(a+b);
+    for (let i=0; i <= nums.length -1; i++) {
+        if(operators[i] === undefined) {
+            console.log(nums[i]);
+        }
+        else {
+            console.log(nums[i] + operators[i]);
         }
     }
-
-
-    console.log(newExpression);
 }
 
 //Addition operator
-function add(){
+function add(a,b){
 
 }
 
 //Subtraction operator
-function subtract(){
+function subtract(a,b){
 
 }
 
 //Multiplication operator
-function multiply(){
+function multiply(a,b){
 
 }
 
 //Division operator
-function divide(){
+function divide(a,b){
 
 }
 
