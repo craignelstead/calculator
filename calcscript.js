@@ -91,6 +91,7 @@ function updateScreen(button){
     //Split each screen character into array
     let screenArr = screenText.innerText.split('');
 
+    //NEED TO FIX THIS SO DEC CAN BE ADDED TO SECOND NUMBER
     //Check if already a decimal point.
     if(buttonText === '.'){
         //Adds 0 if first character is a decimal
@@ -163,19 +164,20 @@ function putTextInArray(){
 
 //Used to decide which operator to call
 function operate(){
+    let workingNum = [];
     let solution = 0;
 
-    for (let i=0; i <= operators.length -1; i++) {
+    for (let i = 0; i <= operators.length -1; i++) {
         switch (operators[i]) {
             case 'btnAdd':
-                solution = add(nums[i], nums[i+1]);
+                workingNum.push(add(nums[i], nums[i+1]));
                 break;
             case 'btnSubtract':
                 
                 break;
         }
     }
-    console.log(solution);
+    console.log(workingNum);
 }
 
 //Addition operator
@@ -185,18 +187,21 @@ function add(a,b){
 
 //Subtraction operator
 function subtract(a,b){
-
+    return Number(a) - Number(b);
 }
 
 //Multiplication operator
 function multiply(a,b){
-
+    return Number(a) * Number(b);
 }
 
 //Division operator
 function divide(a,b){
     if(b === 0) {
-
+        divideByZero();
+    }
+    else {
+        return Number(a) / Number(b);
     }
 }
 
@@ -209,13 +214,37 @@ function divideByZero(){
 function backspace(){
     const screenText = document.getElementById('screenText');
     let screenContent = screenText.innerText.toString();
+
+    //Delete last character from memory
+    let lastChar = screenContent.charAt(screenContent.length-1);
+    //If the last character is between 0-9 or a decimal
+    if((lastChar.charCodeAt(0) >= 48 && lastChar.charCodeAt(0) <= 57) ||
+        lastChar === '.') {
+        nums[nums.length-1] = nums[nums.length-1].slice(0, -1);
+        //Delete the last item in nums array if it is now empty
+        if(nums[nums.length-1] === '') {nums.pop()}
+    }
+    //Delete last operator
+    else {
+        operators.pop();
+    }
+    console.log(nums);
+    console.log(operators);
+
+    //Delete last character from screen
     screenText.textContent = screenContent.slice(0, -1);
 }
 
 //Clears all memory
 function clearAll(){
     const screenText = document.getElementById('screenText');
+
+    //Blanks screen
     screenText.textContent = '';
+
+    //Resets global arrays
+    nums = [''];
+    operators.length = 0;
 }
 
 //Round long numbers
