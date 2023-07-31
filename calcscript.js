@@ -77,35 +77,10 @@ function combineNums(buttonText){
     console.log(nums);
 }
 
+//Create item for new number and set name of operator
 function setOperators(button){
-    console.log(operators.length);
-    switch (operators.length) {
-        case 0:
-            nums.push('');
-            operators.push(button.id);
-            break;
-        case 1:
-            nums.push('');
-            operators.push(button.id);
-            break;
-        case 2:
-            nums.push('');
-            operators.push(button.id);
-            break;
-        case 3:
-            nums.push('');
-            operators.push(button.id);
-            break;
-        case 4:
-            nums.push('');
-            operators.push(button.id);
-            break;
-        case 5:
-            nums.push('');
-            operators.push(button.id);
-            break;
-    }
-    console.log(operators);
+    nums.push('');
+    operators.push(button.id);
 }
 
 //Updates the calculator screen
@@ -188,20 +163,24 @@ function putTextInArray(){
 
 //Used to decide which operator to call
 function operate(){
+    let solution = 0;
 
-    for (let i=0; i <= nums.length -1; i++) {
-        if(operators[i] === undefined) {
-            console.log(nums[i]);
-        }
-        else {
-            console.log(nums[i] + operators[i]);
+    for (let i=0; i <= operators.length -1; i++) {
+        switch (operators[i]) {
+            case 'btnAdd':
+                solution = add(nums[i], nums[i+1]);
+                break;
+            case 'btnSubtract':
+                
+                break;
         }
     }
+    console.log(solution);
 }
 
 //Addition operator
 function add(a,b){
-
+    return Number(a) + Number(b);
 }
 
 //Subtraction operator
@@ -216,7 +195,9 @@ function multiply(a,b){
 
 //Division operator
 function divide(a,b){
+    if(b === 0) {
 
+    }
 }
 
 //Called if division by zero is attempted
