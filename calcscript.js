@@ -143,7 +143,7 @@ function checkValidOperator(){
         lastItem == 'x' ||
         lastItem == '' ||
         lastItem == '.' ||
-        lastItem === '÷') {
+        lastItem == '÷') {
             return false;
         }
         else {return true;}
@@ -196,6 +196,7 @@ function operate(){
                 break;
             case 'btnDivide':
                 solution = divide(solution, nums[i+1]);
+                if (solution === 'DivByZ') {return}
                 break;
         }
     }
@@ -226,8 +227,9 @@ function multiply(a,b){
 
 //Division operator
 function divide(a,b){
-    if(b === 0) {
+    if(b == 0) {
         divideByZero();
+        return 'DivByZ';
     }
     else {
         return Number(a) / Number(b);
@@ -236,7 +238,33 @@ function divide(a,b){
 
 //Called if division by zero is attempted
 function divideByZero(){
-    
+    clearAll();
+    const screenText = document.getElementById('screenText');
+
+    //Disable = button during message
+    const equalBtn = document.getElementById('btnEquals');
+    equalBtn.disabled = true;
+
+    //Display message
+    setTimeout(() => {
+        screenText.innerText = 'DIVIDING';
+    }, "100");
+    setTimeout(() => {
+        screenText.innerText = 'BY';
+    }, "600");
+    setTimeout(() => {
+        screenText.innerText = '0';
+    }, "900");
+    setTimeout(() => {
+        screenText.innerText = 'EH?';
+    }, "1100");
+
+    setTimeout(() => {
+        clearAll();
+    }, "2000");
+
+    //Re-enable button
+    equalBtn.disabled = false;
 }
 
 //Backspace button to delete most recent character
@@ -276,7 +304,32 @@ function clearAll(){
 
 //Round long numbers
 function roundNumber(unroundedNum){
-    console.log(unroundedNum.length);
-    return unroundedNum;
+    console.log(unroundedNum);
+    if(unroundedNum === undefined){return 0}
+
+    unroundedNum = unroundedNum.toString();
+    let roundedNum = 0;
+
+    //Split the string at the decimal
+    let decimals = unroundedNum.split('.');
+    
+    //If not a decimal
+    if (decimals[1] === undefined) {
+        roundedNum = unroundedNum;
+    }
+    //If decimal exceeds 2 points
+    else if (decimals[1].length > 2) {
+        roundedNum = decimals[0] + '.' + decimals[1].substring(0,2);
+    }
+    else {
+        roundedNum = decimals[0].toString();
+    }
+
+    //If even after rounding, the answer is too big for the screen
+    if(roundedNum.length > 12) {
+        return 'Error';
+    }
+
+    return roundedNum;
 }
 
