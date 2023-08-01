@@ -90,16 +90,17 @@ function updateScreen(button){
 
     //Split each screen character into array
     let screenArr = screenText.innerText.split('');
-
-    //NEED TO FIX THIS SO DEC CAN BE ADDED TO SECOND NUMBER
-    //Check if already a decimal point.
+    
+    //Adds 0 if first character is a decimal
     if(buttonText === '.'){
-        //Adds 0 if first character is a decimal
         if (screenText.innerText === ''){screenText.textContent = '0'}
+    }
 
-        const alreadyDecimal = screenArr.find(char => char ===".");
-        if (alreadyDecimal === undefined) {console.log()}
-        else {return};
+    //Check if already a decimal in the current number
+    let numText = nums[nums.length-1].toString();
+    if (buttonText === '.' && numText.includes('.')) {
+        console.log('true');
+        return;
     }
 
     //Entry cannot begin with multiple 0s
@@ -165,9 +166,15 @@ function putTextInArray(){
 //Solve the equation!
 function operate(){
     let solution = 0;
+    let screenText = document.getElementById('screenText');
+
+    //If nothing has been entered, solution is zero
+    if (screenText.innerText === '') {
+        screenText.innerText = 0;
+        return;
+    }
 
     //If there is an extra operator, remove it. Also remove empty number.
-
     if(nums[nums.length-1] === '') {nums.pop();}
     if(nums.length === operators.length) {operators.pop();}
 
@@ -197,7 +204,7 @@ function operate(){
 
     //Clear memory and update screen with solution
     clearAll();
-    const screenText = document.getElementById('screenText');
+    screenText = document.getElementById('screenText');
     screenText.innerText = solution;
     nums[0] = solution;
 }
