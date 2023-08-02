@@ -1,8 +1,8 @@
 /*
     Explain how script works here
 
-    On resume: Fix divide check in checkValidOp
-    Add operator to use when op button is pressed
+    On resume: Add keyboard listeners
+    Touch up css buttons
 */
 
 //Runs when program loads
@@ -17,14 +17,81 @@ let operators = [];
 //Adds event listeners to all buttons
 function assignBtnListeners(){
     const buttons = document.getElementsByClassName('button');
-
-    //Future: add event listeners for keystrokes
     
     //Assign event listener to each node in nodelist
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', (evt) =>
             checkButtonPressed(buttons[i]));
     }
+
+    //Add event listeners for keystrokes
+    let keystroke;
+    let arrayOfBtns = Array.from(buttons);
+    document.addEventListener('keydown', (e) => {
+        console.log(e.key);
+        switch(e.key) {
+            case '0':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btn0');
+                checkButtonPressed(keystroke);
+                break;
+            case '1':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btn1');
+                checkButtonPressed(keystroke);
+                break;
+            case '2':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btn2');
+                checkButtonPressed(keystroke);
+                break;
+            case '3':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btn3');
+                checkButtonPressed(keystroke);
+                break;
+            case '4':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btn4');
+                checkButtonPressed(keystroke);
+                break;
+            case '5':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btn5');
+                checkButtonPressed(keystroke);
+                break;
+            case '6':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btn6');
+                checkButtonPressed(keystroke);
+                break;
+            case '7':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btn7');
+                checkButtonPressed(keystroke);
+                break;
+            case '8':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btn8');
+                checkButtonPressed(keystroke);
+                break;
+            case '9':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btn9');
+                checkButtonPressed(keystroke);
+                break;
+            case '/':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btnDivide');
+                checkButtonPressed(keystroke);
+                break;
+            case 'x':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btnMultiply');
+                checkButtonPressed(keystroke);
+                break;
+            case '+':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btnAdd');
+                checkButtonPressed(keystroke);
+                break;
+            case '-':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btnSubtract');
+                checkButtonPressed(keystroke);
+                break;
+            case 'Enter':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btnEquals');
+                checkButtonPressed(keystroke);
+                break;
+        }
+    });
 }
 
 //Determines which button was pressed and how to proceed
