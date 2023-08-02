@@ -1,7 +1,7 @@
 /*
     Explain how script works here
 
-    On resume: Add keyboard listeners
+    On resume: Fix bug where numbers don't round on keystroke
     Touch up css buttons
 */
 
@@ -24,10 +24,11 @@ function assignBtnListeners(){
             checkButtonPressed(buttons[i]));
     }
 
-    //Add event listeners for keystrokes
+    //Add event listeners for keystrokes. Pass the button to checkButtonPressed
     let keystroke;
     let arrayOfBtns = Array.from(buttons);
     document.addEventListener('keydown', (e) => {
+        document.getElementById('screen').focus();
         console.log(e.key);
         switch(e.key) {
             case '0':
@@ -70,6 +71,10 @@ function assignBtnListeners(){
                 keystroke = arrayOfBtns.find(btn => btn.id === 'btn9');
                 checkButtonPressed(keystroke);
                 break;
+            case '.':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btnDecimal');
+                checkButtonPressed(keystroke);
+                break;
             case '/':
                 keystroke = arrayOfBtns.find(btn => btn.id === 'btnDivide');
                 checkButtonPressed(keystroke);
@@ -88,6 +93,14 @@ function assignBtnListeners(){
                 break;
             case 'Enter':
                 keystroke = arrayOfBtns.find(btn => btn.id === 'btnEquals');
+                checkButtonPressed(keystroke);
+                break;
+            case 'Backspace':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btnBackspace');
+                checkButtonPressed(keystroke);
+                break;
+            case 'Delete':
+                keystroke = arrayOfBtns.find(btn => btn.id === 'btnClear');
                 checkButtonPressed(keystroke);
                 break;
         }
@@ -141,7 +154,7 @@ function combineNums(buttonText){
             nums[0] += buttonText;
             break;
     }
-    console.log(nums);
+    //console.log(nums);
 }
 
 //Create item for new number and set name of operator
@@ -164,10 +177,12 @@ function updateScreen(button){
     }
 
     //Check if already a decimal in the current number
-    let numText = nums[nums.length-1].toString();
-    if (buttonText === '.' && numText.includes('.')) {
-        console.log('true');
-        return;
+    if (screenText.innerText != ''){
+        let numText = nums[nums.length-1].toString();
+        if (buttonText === '.' && numText.includes('.')) {
+            console.log('true');
+            return;
+        }
     }
 
     //Entry cannot begin with multiple 0s
@@ -320,15 +335,24 @@ function divideByZero(){
         screenText.innerText = 'BY';
     }, "600");
     setTimeout(() => {
-        screenText.innerText = '0';
+        screenText.innerText = 'ZERO';
     }, "900");
     setTimeout(() => {
         screenText.innerText = 'EH?';
-    }, "1100");
-
+    }, "1700");
     setTimeout(() => {
+        screenText.innerText = '';
+    }, "2200");
+    setTimeout(() => {
+        screenText.style.fontSize = '60px';
+        screenText.innerText = 'ಠ_ಠ';
+    }, "2400");
+
+    //Clear screen after message
+    setTimeout(() => {
+        screenText.style.fontSize = '40px';
         clearAll();
-    }, "2000");
+    }, "3400");
 
     //Re-enable button
     equalBtn.disabled = false;
@@ -339,11 +363,15 @@ function backspace(){
     const screenText = document.getElementById('screenText');
     let screenContent = screenText.innerText.toString();
 
+    //Makes sure nums never returns undefined
+    if (nums.length === 0) {nums.push(''); return};
+
     //Delete last character from memory
     let lastChar = screenContent.charAt(screenContent.length-1);
     //If the last character is between 0-9 or a decimal
-    if((lastChar.charCodeAt(0) >= 48 && lastChar.charCodeAt(0) <= 57) ||
-        lastChar === '.') {
+    if((lastChar.charCodeAt(0) >= 48
+        && lastChar.charCodeAt(0) <= 57)
+        || lastChar === '.') {
         nums[nums.length-1] = nums[nums.length-1].slice(0, -1);
         //Delete the last item in nums array if it is now empty
         if(nums[nums.length-1] === '') {nums.pop()}
@@ -382,6 +410,10 @@ function roundNumber(unroundedNum){
     
     //If not a decimal
     if (decimals[1] === undefined) {
+        roundedNum = unroundedNum;
+    }
+    //If decimal is short and does not need rounding
+    else if (decimals[1].length === 1 || decimals[1].length === 2) {
         roundedNum = unroundedNum;
     }
     //If decimal exceeds 2 points
