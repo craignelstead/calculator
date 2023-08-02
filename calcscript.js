@@ -1,8 +1,6 @@
 /*
-    Explain how script works here
-
-    On resume: Fix bug where numbers don't round on keystroke
-    Touch up css buttons
+    Calculator for The Odin Project
+    Created by Craig Nelstead 2023
 */
 
 //Runs when program loads
@@ -346,13 +344,13 @@ function divideByZero(){
     setTimeout(() => {
         screenText.style.fontSize = '60px';
         screenText.innerText = 'ಠ_ಠ';
-    }, "2400");
+    }, "3200");
 
     //Clear screen after message
     setTimeout(() => {
         screenText.style.fontSize = '40px';
         clearAll();
-    }, "3400");
+    }, "4200");
 
     //Re-enable button
     equalBtn.disabled = false;
