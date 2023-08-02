@@ -344,13 +344,13 @@ function divideByZero(){
     setTimeout(() => {
         screenText.style.fontSize = '60px';
         screenText.innerText = 'ಠ_ಠ';
-    }, "3200");
+    }, "2900");
 
     //Clear screen after message
     setTimeout(() => {
         screenText.style.fontSize = '40px';
         clearAll();
-    }, "4200");
+    }, "4000");
 
     //Re-enable button
     equalBtn.disabled = false;
@@ -361,8 +361,10 @@ function backspace(){
     const screenText = document.getElementById('screenText');
     let screenContent = screenText.innerText.toString();
 
-    //Makes sure nums never returns undefined
-    if (nums.length === 0) {nums.push(''); return};
+    if (nums.find(index => index === undefined) === true) {
+        console.log('Undef!');
+        clearAll();
+    }
 
     //Delete last character from memory
     let lastChar = screenContent.charAt(screenContent.length-1);
@@ -381,6 +383,9 @@ function backspace(){
 
     //Delete last character from screen
     screenText.textContent = screenContent.slice(0, -1);
+
+    //Makes sure nums never returns undefined
+    if (nums.length === 0) {nums.push('')};
 }
 
 //Clears all memory

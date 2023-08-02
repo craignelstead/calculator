@@ -29,6 +29,7 @@ body {
     justify-content: center;
     margin: 60px;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    flex-direction: column;
 }
 
 #calcMainContainer {
@@ -91,6 +92,7 @@ button {
     height: 60px;
     font-size: 30px;
     text-align: center;
+    border-radius: 10px;
 }
 
 .number {
@@ -113,4 +115,15 @@ button {
 
 .delete {
     background-color: #ECD1C2;
+}
+
+#credit {
+    color: lightgray;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 15px;
+}
+
+#credit a {
+    text-decoration: none;
 }
